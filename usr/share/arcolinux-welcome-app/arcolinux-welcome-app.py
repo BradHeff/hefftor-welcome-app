@@ -24,7 +24,7 @@ class Main(Gtk.Window):
         if not os.path.exists(GUI.home + "/.config/arcolinux-welcome-app/"):
             os.mkdir(GUI.home + "/.config/arcolinux-welcome-app/")
             with open(GUI.home + "/.config/arcolinux-welcome-app/settings.conf", "w") as f:
-                f.write("autostart=False")
+                f.write("autostart=True")
                 f.close()
 
         GUI.GUI(self, Gtk, GdkPixbuf)
