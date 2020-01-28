@@ -1,8 +1,10 @@
 import os
+import getpass
 from os.path import expanduser
 
 base_dir = os.path.dirname(os.path.realpath(__file__))
 home = expanduser("~")
+username = getpass.getuser()
 
 def GUI(self, Gtk, GdkPixbuf):
     autostart = eval(self.load_settings())
@@ -46,22 +48,24 @@ def GUI(self, Gtk, GdkPixbuf):
 
 
     grid = Gtk.Grid()
+    grid2 = Gtk.Grid()
      
     # ======================================================================
     #                   MAIN BUTTONS
     # ======================================================================
 
-    button1 = Gtk.Button(label="Run GParted")
-    button1.connect("clicked", self.on_gp_clicked)
-    button1.set_size_request(0, 100)
+    if username == "liveuser":
+        button1 = Gtk.Button(label="Run GParted")
+        button1.connect("clicked", self.on_gp_clicked)
+        button1.set_size_request(0, 100)
 
-    button2 = Gtk.Button(label="Run Arcolinux Installer")
-    button2.connect("clicked", self.on_ai_clicked)
-    button2.set_size_request(0, 100)
+        button2 = Gtk.Button(label="Run Arcolinux Installer")
+        button2.connect("clicked", self.on_ai_clicked)
+        button2.set_size_request(0, 100)
 
-    grid.add(button1)
-    grid.attach(button1, 0, 0, 1, 2)
-    grid.attach(button2, 1, 0, 1, 2)
+        grid.add(button1)
+        grid.attach(button1, 0, 0, 1, 2)
+        grid.attach(button2, 1, 0, 1, 2)
     grid.set_column_homogeneous(True)
     # grid.set_row_homogeneous(True)
 
@@ -106,6 +110,6 @@ def GUI(self, Gtk, GdkPixbuf):
 
     vbox.pack_start(hbox1, False, False, 0)  # welcome Label
     vbox.pack_start(hbox4, False, False, 0)  # welcome Label
-    vbox.pack_start(grid, True, False, 0)  # Run GParted
+    vbox.pack_start(grid, True, False, 0)  # Run GParted    
     vbox.pack_start(hbox2, False, False, 0)  # Run Installer
     vbox.pack_start(hbox3, False, False, 0)  # Run Installer
