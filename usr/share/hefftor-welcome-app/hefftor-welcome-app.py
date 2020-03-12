@@ -19,15 +19,15 @@ REMOTE_SERVER = "www.google.com"
 
 class Main(Gtk.Window):
     def __init__(self):
-        super(Main, self).__init__(title="ArcoLinux Welcome App")
+        super(Main, self).__init__(title="Hefftor Edition Welcome App")
         self.set_border_width(10)
         self.set_default_size(750, 250)
         self.set_icon_from_file(os.path.join(
-            GUI.base_dir, 'images/arcolinux.png'))
+            GUI.base_dir, 'images/hefftor-old.svg'))
         self.set_position(Gtk.WindowPosition.CENTER)
         self.results = ""
-        if not os.path.exists(GUI.home + "/.config/arcolinux-welcome-app/"):
-            os.mkdir(GUI.home + "/.config/arcolinux-welcome-app/")
+        if not os.path.exists(GUI.home + "/.config/hefftor-welcome-app/"):
+            os.mkdir(GUI.home + "/.config/hefftor-welcome-app/")
             with open(GUI.Settings, "w") as f:
                 f.write("autostart=True")
                 f.close()

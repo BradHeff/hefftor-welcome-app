@@ -11,10 +11,10 @@ home = expanduser("~")
 username = getpass.getuser()
 user = "liveuser"
 
-Settings = home + "/.config/arcolinux-welcome-app/settings.conf"
-Skel_Settings = "/etc/skel/.config/arcolinux-welcome-app/settings.conf"
-dot_desktop = "/usr/share/applications/arcolinux-welcome-app.desktop"
-autostart = home + "/.config/autostart/arcolinux-welcome-app.desktop"
+Settings = home + "/.config/hefftor-welcome-app/settings.conf"
+Skel_Settings = "/etc/skel/.config/hefftor-welcome-app/settings.conf"
+dot_desktop = "/usr/share/applications/hefftor-welcome-app.desktop"
+autostart = home + "/.config/autostart/hefftor-welcome-app.desktop"
 
 
 def GUI(self, Gtk, GdkPixbuf):
@@ -43,7 +43,7 @@ def GUI(self, Gtk, GdkPixbuf):
 
     label = Gtk.Label(xalign=0)
     label.set_markup(
-        "<big>Welcome to <b>ArcoLinux</b></big>")
+        "<big>Welcome to <b>Hefftor Edition</b></big>")
     label.set_line_wrap(True)
 
     # pixbuf = GdkPixbuf.Pixbuf().new_from_file_at_size(
@@ -58,13 +58,13 @@ def GUI(self, Gtk, GdkPixbuf):
 
         label2.set_markup(
             "We advise to clean the computer with Gparted before installing. During the Calamares installation many options will be open to you. You have the freedom of choice. " +  # noqa
-            "The links below will get you started on ArcoLinux. We communicate with our community via a diversity of social media. Do join us to learn the latest news, ask questions or for casual talk. \n\n" +  # noqa
+            "The links below will take you to Hefftor Edition content. We supply much content for you to learn and grow with the use of Hefftor Edition. Do join us to learn the latest news, ask questions or for casual talk. \n\n" +  # noqa
             "We appreciate your feed-back and donation.  \nLearn, have fun and enjoy. \n\n" +  # noqa
             "The ArcoLinux Team")
     else:
-        label2.set_markup("The links below will get you started on ArcoLinux. We communicate with our community via a diversity of social media. Do join us to learn the latest news, ask questions or for casual talk. \n\n" +  # noqa
+        label2.set_markup("The links below will take you to Hefftor Edition content. We supply much content for you to learn and grow with the use of Hefftor Edition. Do join us to learn the latest news, ask questions or for casual talk. \n\n" +  # noqa
                           "We appreciate your feed-back and donation.  \nLearn, have fun and enjoy. \n\n" +  # noqa
-                          "The ArcoLinux Team")
+                          "Brad Heffernan")
     # label2.connect( "size-allocate", self.cb_allocate )
     # vbox1.pack_start(image, False, False, 0)
     # vbox2.pack_start(label, False, False, 0)
@@ -141,53 +141,27 @@ def GUI(self, Gtk, GdkPixbuf):
     # ======================================================================
     #                   FOOTER BUTTON LINKS
     # ======================================================================
-    button3 = Gtk.Button(label="Release info")
-    button3.connect("clicked", self.on_link_clicked,
-                    "https://arcolinux.info/category/2020/")
-
-    button4 = Gtk.Button(label="Choose your project")
-    button4.connect("clicked", self.on_link_clicked,
-                    "https://arcolinux.info/choose-your-project/")
-
-    button5 = Gtk.Button(label="Core info")
-    button5.connect("clicked", self.on_link_clicked,
-                    "https://arcolinux.info/arcolinux-editions/")
-
-    button6 = Gtk.Button(label="Fast track")
-    button6.connect("clicked", self.on_link_clicked,
-                    "https://arcolinux.info/fast-track/")
-
-    button7 = Gtk.Button(label="Forum")
-    button7.connect("clicked", self.on_link_clicked,
-                    "http://arcolinuxforum.com/")
-
-    hbox2.pack_start(button3, True, True, 0)
-    hbox2.pack_start(button4, True, True, 0)
-    hbox2.pack_start(button5, True, True, 0)
-    hbox2.pack_start(button6, True, True, 0)
-    hbox2.pack_start(button7, True, True, 0)
-
     button8 = Gtk.Button(label="")
     button8_label = button8.get_child()
     button8_label.set_markup("<b>Donate</b>")
     button8.connect("clicked", self.on_link_clicked,
-                    "https://arcolinux.info/donation/")
+                    "https://streamlabs.com/bradheffernan1/tip")
 
-    button9 = Gtk.Button(label="Get Involved")
+    button9 = Gtk.Button(label="Twitch")
     button9.connect("clicked", self.on_link_clicked,
-                    "https://arcolinux.info/looking-for-betatesters/")
+                    "https://www.twitch.tv/bradheffernan")
 
-    button10 = Gtk.Button(label="Debug")
+    button10 = Gtk.Button(label="Github")
     button10.connect("clicked", self.on_link_clicked,
-                     "https://github.com/arcolinux")
+                     "https://github.com/bradheff")
 
     button11 = Gtk.Button(label="Youtube")
     button11.connect("clicked", self.on_link_clicked,
-                     "https://www.youtube.com/erikdubois")
+                     "https://www.youtube.com/c/bradheffernan")
 
     hbox5.pack_start(button8, True, True, 0)
-    hbox5.pack_start(button9, True, True, 0)
     hbox5.pack_start(button10, True, True, 0)
+    hbox5.pack_start(button9, True, True, 0)
     hbox5.pack_start(button11, True, True, 0)
 
     # ======================================================================
@@ -202,30 +176,15 @@ def GUI(self, Gtk, GdkPixbuf):
     # ======================================================================
     #                   SOCIAL LINKS
     # ======================================================================
-    fbE = Gtk.EventBox()
     tE = Gtk.EventBox()
-    meE = Gtk.EventBox()
-    inE = Gtk.EventBox()
     liE = Gtk.EventBox()
     pE = Gtk.EventBox()
     dE = Gtk.EventBox()
     tgE = Gtk.EventBox()
 
-    pbfb = GdkPixbuf.Pixbuf().new_from_file_at_size(
-        os.path.join(base_dir, 'images/facebook.png'), 28, 28)
-    fbimage = Gtk.Image().new_from_pixbuf(pbfb)
-
     pbt = GdkPixbuf.Pixbuf().new_from_file_at_size(
         os.path.join(base_dir, 'images/twitter.png'), 28, 28)
     timage = Gtk.Image().new_from_pixbuf(pbt)
-
-    pbme = GdkPixbuf.Pixbuf().new_from_file_at_size(
-        os.path.join(base_dir, 'images/mewe.png'), 23, 23)
-    meimage = Gtk.Image().new_from_pixbuf(pbme)
-
-    pbin = GdkPixbuf.Pixbuf().new_from_file_at_size(
-        os.path.join(base_dir, 'images/insta.png'), 28, 28)
-    inimage = Gtk.Image().new_from_pixbuf(pbin)
 
     pbli = GdkPixbuf.Pixbuf().new_from_file_at_size(
         os.path.join(base_dir, 'images/linkedin.png'), 28, 28)
@@ -243,54 +202,36 @@ def GUI(self, Gtk, GdkPixbuf):
         os.path.join(base_dir, 'images/tg.png'), 28, 28)
     tgimage = Gtk.Image().new_from_pixbuf(pbtg)
 
-    fbE.add(fbimage)
     tE.add(timage)
-    meE.add(meimage)
-    inE.add(inimage)
     liE.add(liimage)
     pE.add(pimage)
     dE.add(dimage)
     tgE.add(tgimage)
 
-    fbE.connect("button_press_event", self.on_social_clicked,
-                "https://www.facebook.com/groups/arcolinux")
     tE.connect("button_press_event", self.on_social_clicked,
-               "https://twitter.com/arcolinux")
-    meE.connect("button_press_event", self.on_social_clicked,
-                "https://mewe.com/group/5bbc4577a40f3002b313671d")
-    inE.connect("button_press_event", self.on_social_clicked,
-                "https://www.instagram.com/arcolinux/")
+               "https://twitter.com/BradHeffernan")
     liE.connect("button_press_event", self.on_social_clicked,
-                "https://www.linkedin.com/in/arcolinux/")
+                "https://www.linkedin.com/in/brad-heffernan83/")
     pE.connect("button_press_event", self.on_social_clicked,
-               "https://www.patreon.com/arcolinux")
+               "https://www.patreon.com/hefftor")
     dE.connect("button_press_event", self.on_social_clicked,
-               "https://discordapp.com/invite/R2amEEz")
+               "https://discord.gg/e9bA7X")
     tgE.connect("button_press_event", self.on_social_clicked,
-                "https://t.me/arcolinux_d_b")
+                "https://t.me/hefftorofficial")
 
-    fbE.set_property("has-tooltip", True)
     tE.set_property("has-tooltip", True)
-    meE.set_property("has-tooltip", True)
-    inE.set_property("has-tooltip", True)
     liE.set_property("has-tooltip", True)
     pE.set_property("has-tooltip", True)
     dE.set_property("has-tooltip", True)
     tgE.set_property("has-tooltip", True)
 
-    fbE.connect("query-tooltip", self.tooltip_callback, "Facebook")
     tE.connect("query-tooltip", self.tooltip_callback, "Twitter")
-    meE.connect("query-tooltip", self.tooltip_callback, "Mewe")
-    inE.connect("query-tooltip", self.tooltip_callback, "Instagram")
     liE.connect("query-tooltip", self.tooltip_callback, "LinkedIn")
     pE.connect("query-tooltip", self.tooltip_callback, "Patreon")
     dE.connect("query-tooltip", self.tooltip_callback, "Discord")
     tgE.connect("query-tooltip", self.tooltip_callback, "Telegram")
 
-    hbox3.pack_start(fbE, False, False, 0)
     hbox3.pack_start(tE, False, False, 0)
-    hbox3.pack_start(meE, False, False, 0)
-    hbox3.pack_start(inE, False, False, 0)
     hbox3.pack_start(liE, False, False, 0)
     hbox3.pack_start(pE, False, False, 0)
 
