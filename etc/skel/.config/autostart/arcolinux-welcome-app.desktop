@@ -2,9 +2,9 @@
 Name=Arcolinux Welcome App
 GenericName=Arcolinux Welcome App
 X-GNOME-FullName=Arcolinux Welcome App
-Comment=Welcome Application for Arcolinux Installs
+Comment=Welcome Application for Arcolinux Installations
 Exec=/usr/local/bin/arcolinux-welcome-app
-Icon=arcolinux-tweak-tool
+Icon=arcolinux-hello
 Terminal=false
 Type=Application
 Categories=GTK;Settings;Security;X-GNOME-Settings-Panel;X-GNOME-SystemSettings;X-Unity-Settings-Panel;X-XFCE-SettingsDialog;X-XFCE-SystemSettings;
