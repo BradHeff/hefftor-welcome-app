@@ -60,7 +60,7 @@ def GUI(self, Gtk, GdkPixbuf):
             "We advise to clean the computer with Gparted before installing. During the Calamares installation many options will be open to you. You have the freedom of choice. " +  # noqa
             "The links below will take you to Hefftor Edition content. We supply much content for you to learn and grow with the use of Hefftor Edition. Do join us to learn the latest news, ask questions or for casual talk. \n\n" +  # noqa
             "We appreciate your feed-back and donation.  \nLearn, have fun and enjoy. \n\n" +  # noqa
-            "The ArcoLinux Team")
+            "Brad Heffernan")
     else:
         label2.set_markup("The links below will take you to Hefftor Edition content. We supply much content for you to learn and grow with the use of Hefftor Edition. Do join us to learn the latest news, ask questions or for casual talk. \n\n" +  # noqa
                           "We appreciate your feed-back and donation.  \nLearn, have fun and enjoy. \n\n" +  # noqa
