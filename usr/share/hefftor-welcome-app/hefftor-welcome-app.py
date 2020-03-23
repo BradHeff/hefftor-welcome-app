@@ -4,6 +4,7 @@
 # =================================================================
 import gi
 import os
+import requests
 import GUI
 import subprocess
 import threading
@@ -25,7 +26,7 @@ class Main(Gtk.Window):
         self.set_icon_from_file(os.path.join(
             GUI.base_dir, 'images/hefftor-old.svg'))
         self.set_position(Gtk.WindowPosition.CENTER)
-        self.results = ""
+        self.results = None
         if not os.path.exists(GUI.home + "/.config/hefftor-welcome-app/"):
             os.mkdir(GUI.home + "/.config/hefftor-welcome-app/")
             with open(GUI.Settings, "w") as f:
@@ -161,30 +162,32 @@ Do you want to install it?")
         GLib.idle_add(self.MessageBox,
                       "Success!",
                       "<b>ArcoLinux Tweak Tool</b> has been installed successfully")  # noqa
-    # def get_message(self, title, message):
-    #     t = threading.Thread(target=self.fetch_notice,
-#                              args=(title, message,))
-    #     t.daemon = True
-    #     t.start()
-    #     t.join()
+    def get_message(self, title, message):
+        t = threading.Thread(target=self.fetch_notice,
+                             args=(title, message,))
+        t.daemon = True
+        t.start()
+        t.join()
 
-    # def fetch_notice(self, title, message):
-    #     try:
-    #         url = 'https://bradheff.github.io/notice/notice'
-    #         req = requests.get(url, verify=True, timeout=1)
+    def fetch_notice(self, title, message):
+        try:
+            url = 'https://bradheff.github.io/notice/notice'
+            req = requests.get(url, verify=True, timeout=1)
 
-    #         if req.status_code == requests.codes.ok:
-    #             if not len(req.text) <= 1:
-    #                 title.set_markup(
-    #                 "<big><b><u>Notice</u></b></big>")
-    #                 message.set_markup(req.text)
-    #                 self.results = True
-    #             else:
-    #                 self.results = False
-    #         else:
-    #             self.results = False
-    #     except:
-    #         self.results = False
+            if req.status_code == requests.codes.ok:
+                if not len(req.text) <= 1:
+                    message.set_markup(req.text)
+                    self.results = True
+                    print("FOUND")
+                else:
+                    self.results = False
+                    print("NOT LEN")
+            else:
+                self.results = False
+                print("NOT OK")
+        except:
+            print("EXCEPT")
+            self.results = False
 
 
 if __name__ == "__main__":
