@@ -23,6 +23,7 @@ class Main(Gtk.Window):
         super(Main, self).__init__(title="Hefftor Edition Welcome App")
         self.set_border_width(10)
         self.set_default_size(750, 250)
+        self.set_size_request(750, 250)
         self.set_icon_from_file(os.path.join(
             GUI.base_dir, 'images/hefftor-old.svg'))
         self.set_position(Gtk.WindowPosition.CENTER)

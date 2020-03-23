@@ -105,13 +105,13 @@ def GUI(self, Gtk, GdkPixbuf):
 
     label3 = Gtk.Label(xalign=0)
     label3.set_markup(
-                    "<big><b><u>Notice</u></b></big>")
+                    "<big><b><u>News</u></b></big>")
     label3.set_line_wrap(True)
     # label3.set_justify(Gtk.Justification.CENTER)
 
     label4 = Gtk.Label()
     label4.set_line_wrap(True)
-    # label4.set_justify(Gtk.Justification.CENTER)
+    label4.set_justify(Gtk.Justification.CENTER)
 
     self.vbox2 = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
 
@@ -277,10 +277,9 @@ def GUI(self, Gtk, GdkPixbuf):
     if username == user:
         self.vbox.pack_start(grid, True, False, 7)  # Run GParted/Calamares
 
-    if self.results and self.is_connected():
-        self.vbox.pack_start(self.vbox2, False, False, 0)  # Notice
-
     self.vbox.pack_end(hbox3, False, False, 0)  # Footer
     self.vbox.pack_end(hbox7, False, False, 0)  # Version
     self.vbox.pack_end(hbox5, False, False, 7)  # Buttons
     self.vbox.pack_end(hbox2, False, False, 7)  # Buttons
+    if self.results and self.is_connected():
+        self.vbox.pack_end(self.vbox2, False, False, 0)  # Notice
