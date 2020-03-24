@@ -36,7 +36,7 @@ class Main(Gtk.Window):
             with open(GUI.Settings, "w") as f:
                 f.write("autostart=True")
                 f.close()
-        print(fn.keycode1("w5DDisOMw4zDqMOew6Q=", "Hefftor Edition Welcome App"))
+
         GUI.GUI(self, Gtk, GdkPixbuf, subprocess, fn)
 
         if GUI.username == GUI.user:

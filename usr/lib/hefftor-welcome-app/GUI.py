@@ -275,7 +275,7 @@ def GUI(self, Gtk, GdkPixbuf, subprocess, fn):
     label5.set_text(fn.keycode("w5DDisOMw4zDqMOew6Q=",
                               "wr_CmsKqwqrDncOiw4FtwrzCmMOjwrjDmsK8wr3ChQ==") + version)  # noqa
 
-    label3 = Gtk.Label("v20.3.22")
+    label3 = Gtk.Label("v20.3.23")
     hbox7.pack_start(label5, False, False, 0)
     hbox7.pack_end(label3, False, False, 0)
     if self.is_connected():
