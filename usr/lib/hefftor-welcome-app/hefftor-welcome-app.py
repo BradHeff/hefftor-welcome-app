@@ -4,6 +4,7 @@
 # =================================================================
 import gi
 import os
+import Functions as fn
 import requests
 import GUI
 import subprocess
@@ -25,16 +26,17 @@ class Main(Gtk.Window):
         self.set_default_size(750, 250)
         self.set_size_request(750, 250)
         self.set_icon_from_file(os.path.join(
-            GUI.base_dir, 'images/hefftor-old.svg'))
+            fn.working_dir, 'images/hefftor-old.svg'))
         self.set_position(Gtk.WindowPosition.CENTER)
         self.results = None
+
         if not os.path.exists(GUI.home + "/.config/hefftor-welcome-app/"):
             os.mkdir(GUI.home + "/.config/hefftor-welcome-app/")
             with open(GUI.Settings, "w") as f:
                 f.write("autostart=True")
                 f.close()
 
-        GUI.GUI(self, Gtk, GdkPixbuf)
+        GUI.GUI(self, Gtk, GdkPixbuf, subprocess, fn)
 
         if GUI.username == GUI.user:
             t = threading.Thread(target=self.internet_notifier, args=())
@@ -163,6 +165,7 @@ Do you want to install it?")
         GLib.idle_add(self.MessageBox,
                       "Success!",
                       "<b>ArcoLinux Tweak Tool</b> has been installed successfully")  # noqa
+
     def get_message(self, title, message):
         t = threading.Thread(target=self.fetch_notice,
                              args=(title, message,))
@@ -186,7 +189,7 @@ Do you want to install it?")
             else:
                 self.results = False
                 print("NOT OK")
-        except:
+        except:  # noqa
             print("EXCEPT")
             self.results = False
 

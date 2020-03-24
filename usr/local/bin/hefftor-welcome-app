@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-python3 /usr/share/hefftor-welcome-app/hefftor-welcome-app.py
+python3 /usr/lib/hefftor-welcome-app/hefftor-welcome-app.py

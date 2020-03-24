@@ -17,7 +17,7 @@ dot_desktop = "/usr/share/applications/hefftor-welcome-app.desktop"
 autostart = home + "/.config/autostart/hefftor-welcome-app.desktop"
 
 
-def GUI(self, Gtk, GdkPixbuf):
+def GUI(self, Gtk, GdkPixbuf, subprocess, fn):
 
     autostart = eval(self.load_settings())
 
@@ -42,8 +42,9 @@ def GUI(self, Gtk, GdkPixbuf):
     self.cc = Gtk.Label()
 
     label = Gtk.Label(xalign=0)
-    label.set_markup(
-        "<big>Welcome to <b>Hefftor Edition</b></big>")
+    standard = fn.keycode("w5DDisOMw4zDqMOew6Q=",
+                         "wrPCl8KtwqvCp8OKwrTCucOawqPDp8KpwpHDgcK-woXCs8KYwo_ChcOcwpvCqsK4w5jDpW_CksObwp3DrsKtw6DCu8KLwpTDmXTCjWzDmcKewqvCgg==")  # noqa
+    label.set_markup(standard)
     label.set_line_wrap(True)
 
     # pixbuf = GdkPixbuf.Pixbuf().new_from_file_at_size(
@@ -187,23 +188,23 @@ def GUI(self, Gtk, GdkPixbuf):
     tgE = Gtk.EventBox()
 
     pbt = GdkPixbuf.Pixbuf().new_from_file_at_size(
-        os.path.join(base_dir, 'images/twitter.png'), 28, 28)
+        os.path.join(fn.working_dir, 'images/twitter.png'), 28, 28)
     timage = Gtk.Image().new_from_pixbuf(pbt)
 
     pbli = GdkPixbuf.Pixbuf().new_from_file_at_size(
-        os.path.join(base_dir, 'images/linkedin.png'), 28, 28)
+        os.path.join(fn.working_dir, 'images/linkedin.png'), 28, 28)
     liimage = Gtk.Image().new_from_pixbuf(pbli)
 
     pbp = GdkPixbuf.Pixbuf().new_from_file_at_size(
-        os.path.join(base_dir, 'images/patreon.png'), 28, 28)
+        os.path.join(fn.working_dir, 'images/patreon.png'), 28, 28)
     pimage = Gtk.Image().new_from_pixbuf(pbp)
 
     pbd = GdkPixbuf.Pixbuf().new_from_file_at_size(
-        os.path.join(base_dir, 'images/discord.png'), 28, 28)
+        os.path.join(fn.working_dir, 'images/discord.png'), 28, 28)
     dimage = Gtk.Image().new_from_pixbuf(pbd)
 
     pbtg = GdkPixbuf.Pixbuf().new_from_file_at_size(
-        os.path.join(base_dir, 'images/tg.png'), 28, 28)
+        os.path.join(fn.working_dir, 'images/tg.png'), 28, 28)
     tgimage = Gtk.Image().new_from_pixbuf(pbtg)
 
     tE.add(timage)
@@ -250,7 +251,7 @@ def GUI(self, Gtk, GdkPixbuf):
     # ======================================================================
     launchBox = Gtk.EventBox()
     pblaunch = GdkPixbuf.Pixbuf().new_from_file_at_size(
-        os.path.join(base_dir, 'images/hefftor.svg'), 40, 40)
+        os.path.join(fn.working_dir, 'images/hefftor.svg'), 40, 40)
     launchimage = Gtk.Image().new_from_pixbuf(pblaunch)
 
     launchBox.add(launchimage)
@@ -266,7 +267,16 @@ def GUI(self, Gtk, GdkPixbuf):
     # ======================================================================
     #                   PACK TO WINDOW
     # ======================================================================
+    label5 = Gtk.Label()
+    p = subprocess.run(["lsb_release", "-r"],
+                       shell=False,
+                       stdout=subprocess.PIPE)
+    version = p.stdout.decode().split(":")[-1].strip()
+    label5.set_text(fn.keycode("w5DDisOMw4zDqMOew6Q=",
+                              "wr_CmsKqwqrDncOiw4FtwrzCmMOjwrjDmsK8wr3ChQ==") + version)  # noqa
+
     label3 = Gtk.Label("v20.3.21")
+    hbox7.pack_start(label5, False, False, 0)
     hbox7.pack_end(label3, False, False, 0)
     if self.is_connected():
         self.get_message(label3, label4)
