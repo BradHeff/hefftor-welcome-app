@@ -21,7 +21,8 @@ REMOTE_SERVER = "www.google.com"
 
 class Main(Gtk.Window):
     def __init__(self):
-        super(Main, self).__init__(title="Hefftor Edition Welcome App")
+        super(Main, self).__init__(title=fn.keycode("w5DDisOMw4zDqMOew6Q=",
+                                                    "wr_CmsKqwqrDncOiw4FtwrzCmMOjwrjDmsK8wr3ChcOOwpvCvcKgw6bCosKpZMKqw6PCvw=="))
         self.set_border_width(10)
         self.set_default_size(750, 250)
         self.set_size_request(750, 250)
@@ -35,7 +36,7 @@ class Main(Gtk.Window):
             with open(GUI.Settings, "w") as f:
                 f.write("autostart=True")
                 f.close()
-
+        print(fn.keycode1("w5DDisOMw4zDqMOew6Q=", "Hefftor Edition Welcome App"))
         GUI.GUI(self, Gtk, GdkPixbuf, subprocess, fn)
 
         if GUI.username == GUI.user:
