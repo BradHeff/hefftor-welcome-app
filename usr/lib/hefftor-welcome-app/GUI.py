@@ -2,20 +2,6 @@
 # =                  Author: Brad Heffernan                       =
 # =================================================================
 
-import os
-import getpass
-from os.path import expanduser
-
-base_dir = os.path.dirname(os.path.realpath(__file__))
-home = expanduser("~")
-username = getpass.getuser()
-user = "liveuser"
-
-Settings = home + "/.config/hefftor-welcome-app/settings.conf"
-Skel_Settings = "/etc/skel/.config/hefftor-welcome-app/settings.conf"
-dot_desktop = "/usr/share/applications/hefftor-welcome-app.desktop"
-autostart = home + "/.config/autostart/hefftor-welcome-app.desktop"
-
 
 def GUI(self, Gtk, GdkPixbuf, subprocess, fn):
 
@@ -55,7 +41,7 @@ def GUI(self, Gtk, GdkPixbuf, subprocess, fn):
     label2.set_justify(Gtk.Justification.CENTER)
     label2.set_line_wrap(True)
 
-    if username == user:
+    if fn.username == fn.user:
 
         label2.set_markup(
             "We advise to clean the computer with Gparted before installing. During the Calamares installation many options will be open to you. You have the freedom of choice. " +  # noqa
@@ -104,20 +90,20 @@ def GUI(self, Gtk, GdkPixbuf, subprocess, fn):
     #                   NOTICE
     # ======================================================================
 
-    label3 = Gtk.Label(xalign=0)
-    label3.set_markup(
+    self.label3 = Gtk.Label(xalign=0)
+    self.label3.set_markup(
                     "<big><b><u>News</u></b></big>")
-    label3.set_line_wrap(True)
+    self.label3.set_line_wrap(True)
     # label3.set_justify(Gtk.Justification.CENTER)
 
-    label4 = Gtk.Label()
-    label4.set_line_wrap(True)
-    label4.set_justify(Gtk.Justification.CENTER)
+    self.label4 = Gtk.Label()
+    self.label4.set_line_wrap(True)
+    self.label4.set_justify(Gtk.Justification.CENTER)
 
     self.vbox2 = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
 
-    self.vbox2.pack_start(label3, False, False, 0)
-    self.vbox2.pack_start(label4, False, False, 0)
+    self.vbox2.pack_start(self.label3, False, False, 0)
+    self.vbox2.pack_start(self.label4, False, False, 0)
 
     # ======================================================================
     #                   USER INFO
@@ -188,23 +174,23 @@ def GUI(self, Gtk, GdkPixbuf, subprocess, fn):
     tgE = Gtk.EventBox()
 
     pbt = GdkPixbuf.Pixbuf().new_from_file_at_size(
-        os.path.join(fn.working_dir, 'images/twitter.png'), 28, 28)
+        fn.os.path.join(fn.working_dir, 'images/twitter.png'), 28, 28)
     timage = Gtk.Image().new_from_pixbuf(pbt)
 
     pbli = GdkPixbuf.Pixbuf().new_from_file_at_size(
-        os.path.join(fn.working_dir, 'images/linkedin.png'), 28, 28)
+        fn.os.path.join(fn.working_dir, 'images/linkedin.png'), 28, 28)
     liimage = Gtk.Image().new_from_pixbuf(pbli)
 
     pbp = GdkPixbuf.Pixbuf().new_from_file_at_size(
-        os.path.join(fn.working_dir, 'images/patreon.png'), 28, 28)
+        fn.os.path.join(fn.working_dir, 'images/patreon.png'), 28, 28)
     pimage = Gtk.Image().new_from_pixbuf(pbp)
 
     pbd = GdkPixbuf.Pixbuf().new_from_file_at_size(
-        os.path.join(fn.working_dir, 'images/discord.png'), 28, 28)
+        fn.os.path.join(fn.working_dir, 'images/discord.png'), 28, 28)
     dimage = Gtk.Image().new_from_pixbuf(pbd)
 
     pbtg = GdkPixbuf.Pixbuf().new_from_file_at_size(
-        os.path.join(fn.working_dir, 'images/tg.png'), 28, 28)
+        fn.os.path.join(fn.working_dir, 'images/tg.png'), 28, 28)
     tgimage = Gtk.Image().new_from_pixbuf(pbtg)
 
     tE.add(timage)
@@ -242,7 +228,7 @@ def GUI(self, Gtk, GdkPixbuf, subprocess, fn):
 
     hbox6.pack_start(dE, False, False, 0)
     hbox6.pack_start(tgE, False, False, 0)
-    if username == user:
+    if fn.username == fn.user:
         hbox3.pack_start(hboxUser, True, False, 0)
     hbox3.pack_start(hbox6, True, False, 0)
 
@@ -251,7 +237,7 @@ def GUI(self, Gtk, GdkPixbuf, subprocess, fn):
     # ======================================================================
     launchBox = Gtk.EventBox()
     pblaunch = GdkPixbuf.Pixbuf().new_from_file_at_size(
-        os.path.join(fn.working_dir, 'images/hefftor.svg'), 40, 40)
+        fn.os.path.join(fn.working_dir, 'images/hefftor.svg'), 40, 40)
     launchimage = Gtk.Image().new_from_pixbuf(pblaunch)
 
     launchBox.add(launchimage)
@@ -279,17 +265,17 @@ def GUI(self, Gtk, GdkPixbuf, subprocess, fn):
     hbox7.pack_start(label5, False, False, 0)
     hbox7.pack_end(label3, False, False, 0)
     if self.is_connected():
-        self.get_message(label3, label4)
+        self.get_message()
 
     self.vbox.pack_start(hbox1, False, False, 7)  # Logo
     self.vbox.pack_start(hbox4, False, False, 7)  # welcome Label
 
-    if username == user:
+    if fn.username == fn.user:
         self.vbox.pack_start(grid, True, False, 7)  # Run GParted/Calamares
 
     self.vbox.pack_end(hbox3, False, False, 0)  # Footer
     self.vbox.pack_end(hbox7, False, False, 0)  # Version
     self.vbox.pack_end(hbox5, False, False, 7)  # Buttons
     self.vbox.pack_end(hbox2, False, False, 7)  # Buttons
-    if self.results and self.is_connected():
-        self.vbox.pack_end(self.vbox2, False, False, 0)  # Notice
+    # if self.is_connected():
+    #     self.vbox.pack_end(self.vbox2, False, False, 0)  # Notice

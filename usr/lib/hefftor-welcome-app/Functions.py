@@ -1,6 +1,23 @@
+# =================================================================
+# =                  Author: Brad Heffernan                       =
+# =================================================================
+
 import base64
 from pathlib import Path
+import os
+import getpass
+from os.path import expanduser
+import threading
 
+base_dir = os.path.dirname(os.path.realpath(__file__))
+home = expanduser("~")
+username = getpass.getuser()
+user = "liveuser"
+
+Settings = home + "/.config/hefftor-welcome-app/settings.conf"
+Skel_Settings = "/etc/skel/.config/hefftor-welcome-app/settings.conf"
+dot_desktop = "/usr/share/applications/hefftor-welcome-app.desktop"
+autostart = home + "/.config/autostart/hefftor-welcome-app.desktop"
 working_dir = ''.join([str(Path(__file__).parents[2]),
                        "/share/hefftor-welcome-app/"])
 

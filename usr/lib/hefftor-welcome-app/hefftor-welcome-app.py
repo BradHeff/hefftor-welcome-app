@@ -3,12 +3,10 @@
 # =                  Author: Brad Heffernan                       =
 # =================================================================
 import gi
-import os
 import Functions as fn
 import requests
 import GUI
 import subprocess
-import threading
 import webbrowser
 import shutil
 import socket
@@ -26,33 +24,33 @@ class Main(Gtk.Window):
         self.set_border_width(10)
         self.set_default_size(750, 250)
         self.set_size_request(750, 250)
-        self.set_icon_from_file(os.path.join(
+        self.set_icon_from_file(fn.os.path.join(
             fn.working_dir, 'images/hefftor-old.svg'))
         self.set_position(Gtk.WindowPosition.CENTER)
         self.results = None
 
-        if not os.path.exists(GUI.home + "/.config/hefftor-welcome-app/"):
-            os.mkdir(GUI.home + "/.config/hefftor-welcome-app/")
-            with open(GUI.Settings, "w") as f:
+        if not fn.os.path.exists(fn.home + "/.config/hefftor-welcome-app/"):
+            fn.os.mkdir(fn.home + "/.config/hefftor-welcome-app/")
+            with open(fn.Settings, "w") as f:
                 f.write("autostart=True")
                 f.close()
 
         GUI.GUI(self, Gtk, GdkPixbuf, subprocess, fn)
 
-        if GUI.username == GUI.user:
-            t = threading.Thread(target=self.internet_notifier, args=())
+        if fn.username == fn.user:
+            t = fn.threading.Thread(target=self.internet_notifier, args=())
             t.daemon = True
             t.start()
 
     def on_ai_clicked(self, widget):
-        t = threading.Thread(target=self.run_app,
-                             args=(["pkexec", "/usr/bin/calamares"],))
+        t = fn.threading.Thread(target=self.run_app,
+                                args=(["pkexec", "/usr/bin/calamares"],))
         t.daemon = True
         t.start()
 
     def on_gp_clicked(self, widget):
-        t = threading.Thread(target=self.run_app,
-                             args=(["/usr/bin/gparted"],))
+        t = fn.threading.Thread(target=self.run_app,
+                                args=(["/usr/bin/gparted"],))
         t.daemon = True
         t.start()
 
@@ -64,22 +62,22 @@ class Main(Gtk.Window):
 
     def statup_toggle(self, widget):
         if widget.get_active() is True:
-            if os.path.isfile(GUI.dot_desktop):
-                shutil.copy(GUI.dot_desktop, GUI.autostart)
+            if fn.os.path.isfile(fn.dot_desktop):
+                shutil.copy(fn.dot_desktop, fn.autostart)
         else:
-            if os.path.isfile(GUI.autostart):
-                os.unlink(GUI.autostart)
+            if fn.os.path.isfile(fn.autostart):
+                fn.os.unlink(fn.autostart)
         self.save_settings(widget.get_active())
 
     def save_settings(self, state):
-        with open(GUI.Settings, "w") as f:
+        with open(fn.Settings, "w") as f:
             f.write("autostart=" + str(state))
             f.close()
 
     def load_settings(self):
         line = "True"
-        if os.path.isfile(GUI.Settings):
-            with open(GUI.Settings, "r") as f:
+        if fn.os.path.isfile(fn.Settings):
+            with open(fn.Settings, "r") as f:
                 lines = f.readlines()
                 for i in range(len(lines)):
                     if "autostart" in lines[i]:
@@ -88,12 +86,12 @@ class Main(Gtk.Window):
         return line
 
     def on_link_clicked(self, widget, link):
-        t = threading.Thread(target=self.weblink, args=(link,))
+        t = fn.threading.Thread(target=self.weblink, args=(link,))
         t.daemon = True
         t.start()
 
     def on_social_clicked(self, widget, event, link):
-        t = threading.Thread(target=self.weblink, args=(link,))
+        t = fn.threading.Thread(target=self.weblink, args=(link,))
         t.daemon = True
         t.start()
 
@@ -115,9 +113,9 @@ class Main(Gtk.Window):
         return True
 
     def on_launch_clicked(self, widget, event, link):
-        if os.path.isfile("/usr/local/bin/arcolinux-tweak-tool"):
-            t = threading.Thread(target=self.run_app,
-                                 args=("/usr/local/bin/arcolinux-tweak-tool",))
+        if fn.os.path.isfile("/usr/local/bin/arcolinux-tweak-tool"):
+            t = fn.threading.Thread(target=self.run_app,
+                                    args=("/usr/local/bin/arcolinux-tweak-tool",))
             t.daemon = True
             t.start()
         else:
@@ -135,7 +133,7 @@ Do you want to install it?")
             md.destroy()
 
             if result in (Gtk.ResponseType.OK, Gtk.ResponseType.YES):
-                t1 = threading.Thread(target=self.installATT, args=())
+                t1 = fn.threading.Thread(target=self.installATT, args=())
                 t1.daemon = True
                 t1.start()
 
@@ -167,26 +165,27 @@ Do you want to install it?")
                       "Success!",
                       "<b>ArcoLinux Tweak Tool</b> has been installed successfully")  # noqa
 
-    def get_message(self, title, message):
-        t = threading.Thread(target=self.fetch_notice,
-                             args=(title, message,))
+    def get_message(self):
+        t = fn.threading.Thread(target=self.fetch_notice,
+                                args=())
         t.daemon = True
         t.start()
-        t.join()
 
-    def fetch_notice(self, title, message):
+    def fetch_notice(self):
         try:
             url = 'https://bradheff.github.io/notice/notice'
             req = requests.get(url, verify=True, timeout=1)
 
             if req.status_code == requests.codes.ok:
                 if not len(req.text) <= 1:
-                    message.set_markup(req.text)
+                    GLib.idle_add(self.vbox.pack_end, self.vbox2, False, False, 0)
+                    GLib.idle_add(self.label4.set_text, req.text)
+                    GLib.idle_add(self.vbox.show_all)
                     self.results = True
-                    print("FOUND")
+                    # print("FOUND")
                 else:
                     self.results = False
-                    print("NOT LEN")
+                    # print("NOT LEN")
             else:
                 self.results = False
                 print("NOT OK")
