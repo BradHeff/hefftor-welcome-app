@@ -159,7 +159,7 @@ def GUI(self, Gtk, GdkPixbuf, subprocess, fn):
     #                   Add to startup
     # ======================================================================
 
-    check = Gtk.CheckButton(label="Start on Startup")
+    check = Gtk.CheckButton(label="Autostart")
     check.connect("toggled", self.statup_toggle)
     check.set_active(autostart)
     hbox3.pack_end(check, False, False, 0)
@@ -250,6 +250,19 @@ def GUI(self, Gtk, GdkPixbuf, subprocess, fn):
 
     hbox6.pack_start(launchBox, False, False, 0)
 
+    # ======================================================================
+    #                   Conflicts
+    # ======================================================================
+    infoE = Gtk.EventBox()
+    pbinfo = GdkPixbuf.Pixbuf().new_from_file_at_size(
+        fn.os.path.join(fn.working_dir, 'images/question.png'), 38, 38)
+    infoimage = Gtk.Image().new_from_pixbuf(pbinfo)
+    infoE.add(infoimage)
+    infoE.connect("button_press_event", self.on_info_clicked)
+    infoE.set_property("has-tooltip", True)
+    infoE.connect("query-tooltip", self.tooltip_callback, "Conflicts Info")
+
+    hbox6.pack_start(infoE, False, False, 0)
     # ======================================================================
     #                   PACK TO WINDOW
     # ======================================================================

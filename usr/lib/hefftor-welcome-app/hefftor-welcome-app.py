@@ -6,13 +6,15 @@ import gi
 import Functions as fn
 import requests
 import GUI
+import conflicts
 import subprocess
 import webbrowser
 import shutil
 import socket
 from time import sleep
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, GdkPixbuf, GLib  # noqa
+gi.require_version('Wnck', '3.0')
+from gi.repository import Gtk, Wnck, GdkPixbuf, GLib  # noqa
 
 REMOTE_SERVER = "www.google.com"
 
@@ -94,6 +96,16 @@ class Main(Gtk.Window):
         t = fn.threading.Thread(target=self.weblink, args=(link,))
         t.daemon = True
         t.start()
+
+    def on_info_clicked(self, widget, event):
+        window_list = Wnck.Screen.get_default().get_windows()
+        state = False
+        for win in window_list:
+            if "Information" in win.get_name():
+                state = True
+        if not state:
+            w = conflicts.Conflicts()
+            w.show_all()
 
     def weblink(self, link):
         webbrowser.open_new_tab(link)
