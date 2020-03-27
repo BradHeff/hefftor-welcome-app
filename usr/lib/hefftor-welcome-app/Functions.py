@@ -30,3 +30,9 @@ def keycode(key, enc):
         dec_c = chr((256 + ord(enc[i]) - ord(key_c)) % 256)
         dec.append(dec_c)
     return "".join(dec)
+
+
+def _get_position(lists, value):
+    data = [string for string in lists if value in string]
+    position = lists.index(data[0])
+    return position

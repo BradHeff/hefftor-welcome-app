@@ -185,13 +185,27 @@ Do you want to install it?")
 
     def fetch_notice(self):
         try:
-            url = 'https://bradheff.github.io/notice/notice'
+            url = 'https://bradheff.github.io/notice/notice2'
             req = requests.get(url, verify=True, timeout=1)
 
             if req.status_code == requests.codes.ok:
                 if not len(req.text) <= 1:
+                    lines = req.text.split("\n")
+                    pos1 = fn._get_position(lines, "[message]")
+                    pos2 = fn._get_position(lines, "[link]")
+                    
+                    links = lines[pos2:]
+                    link_npos = fn._get_position(links, "title=")
+                    link_lpos = fn._get_position(links, "link=")
+
+                    message = lines[pos1 + 1].strip()
+
+                    link_name = lines[pos2 + link_npos].split("=")[1].strip()
+                    link = lines[pos2 + link_lpos].split("=")[1].strip()
+
                     GLib.idle_add(self.vbox.pack_end, self.vbox2, False, False, 0)
-                    GLib.idle_add(self.label4.set_text, req.text)
+                    GLib.idle_add(self.label4.set_markup,
+                                  message + "\n" + "<span foreground=\"orange\"><a href=\"" + link + "\" title=\"Click to find out more\">" + link_name + "</a></span>")
                     GLib.idle_add(self.vbox.show_all)
                     self.results = True
                     # print("FOUND")
