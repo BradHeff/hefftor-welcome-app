@@ -1,5 +1,6 @@
 import gi
 import os
+import Functions as fn
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk  # noqa
 
@@ -12,7 +13,7 @@ class Conflicts(Gtk.Window):
         self.set_border_width(10)
         self.set_default_size(550, 250)
         self.connect("delete-event", self.close)
-        self.set_icon_from_file(os.path.join(base_dir, 'images/hefftor-old.svg'))
+        self.set_icon_from_file(os.path.join(fn.working_dir, 'images/hefftor-old.svg'))
         self.set_position(Gtk.WindowPosition.CENTER)
 
         vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
