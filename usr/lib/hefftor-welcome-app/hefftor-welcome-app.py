@@ -22,7 +22,7 @@ REMOTE_SERVER = "www.google.com"
 class Main(Gtk.Window):
     def __init__(self):
         super(Main, self).__init__(title=fn.keycode("w5DDisOMw4zDqMOew6Q=",
-                                                    "wr_CmsKqwqrDncOiw4FtwrzCmMOjwrjDmsK8wr3ChcOOwpvCvcKgw6bCosKpZMKqw6PCvw=="))
+                                                    "wr_CmsKqwqrDncOiw4FtwrzCmMOjwrjDmsK8wr3ChcOOwpvCvcKgw6bCosKpZMKqw6PCvw=="))  # noqa
         self.set_border_width(10)
         self.set_default_size(750, 250)
         self.set_size_request(750, 250)
@@ -127,7 +127,7 @@ class Main(Gtk.Window):
     def on_launch_clicked(self, widget, event, link):
         if fn.os.path.isfile("/usr/local/bin/arcolinux-tweak-tool"):
             t = fn.threading.Thread(target=self.run_app,
-                                    args=("/usr/local/bin/arcolinux-tweak-tool",))
+                                    args=("/usr/local/bin/arcolinux-tweak-tool",))  # noqa
             t.daemon = True
             t.start()
         else:
@@ -193,7 +193,7 @@ Do you want to install it?")
                     lines = req.text.split("\n")
                     pos1 = fn._get_position(lines, "[message]")
                     pos2 = fn._get_position(lines, "[link]")
-                    
+
                     links = lines[pos2:]
                     link_npos = fn._get_position(links, "title=")
                     link_lpos = fn._get_position(links, "link=")
@@ -203,9 +203,10 @@ Do you want to install it?")
                     link_name = lines[pos2 + link_npos].split("=")[1].strip()
                     link = lines[pos2 + link_lpos].split("=")[1].strip()
 
-                    GLib.idle_add(self.vbox.pack_end, self.vbox2, False, False, 0)
+                    GLib.idle_add(self.vbox.pack_end,
+                                  self.vbox2, False, False, 0)
                     GLib.idle_add(self.label4.set_markup,
-                                  message + "\n" + "<span foreground=\"orange\"><a href=\"" + link + "\" title=\"Click to find out more\">" + link_name + "</a></span>")
+                                  message + "\n" + "<span foreground=\"orange\"><a href=\"" + link + "\" title=\"Click to find out more\">" + link_name + "</a></span>")  # noqa
                     GLib.idle_add(self.vbox.show_all)
                     self.results = True
                     # print("FOUND")
