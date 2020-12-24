@@ -1,8 +1,8 @@
 [Desktop Entry]
-Name=Hefftor Edition Welcome App
+Name=HefftorLinux Welcome App
 GenericName=Hefftor Edition Welcome App
-X-GNOME-FullName=Hefftor Edition Welcome App
-Comment=Welcome Application for Hefftor Edition Installations
+X-GNOME-FullName=HefftorLinux Welcome App
+Comment=Welcome Application for HefftorLinux Installations
 Exec=/usr/local/bin/hefftor-welcome-app
 Icon=hefftorlinux
 Terminal=false
