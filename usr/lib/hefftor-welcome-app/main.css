@@ -1,0 +1,44 @@
+window > box {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+flowbox {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+flowbox > flowboxchild {
+    margin-bottom: 30px;
+}
+
+flowbox#installer {
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+flowbox#installer > flowboxchild {
+    margin-bottom: 10px;
+}
+
+#news {
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 15px;
+}
+frame#awesome * {
+    /* padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    padding-top: 10px; */
+    border-color: grey;
+}
+
+button#apply {
+    border-radius: 20px;
+}
